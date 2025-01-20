@@ -8,10 +8,8 @@
 import Foundation
 import UIKit
 
-final class StorageManager {
-    static let shared = StorageManager()
+final class StorageManager: StorageManagerProtocol {
     private let historyKey = "searchHistory"
-    private init() {}
 
     func saveAlbums(_ albums: [Album], for searchTerm: String) {
         do {
@@ -19,18 +17,6 @@ final class StorageManager {
             UserDefaults.standard.set(data, forKey: searchTerm)
         } catch {
             print("Failed to encode characters: \(error)")
-        }
-    }
-
-    func saveImage(_ image: Data, key: String) {
-        UserDefaults.standard.set(image, forKey: key)
-    }
-
-    func saveSearchTerm(_ term: String) {
-        var history = getSearchHistory()
-        if !history.contains(term) {
-            history.insert(term, at: 0)
-            UserDefaults.standard.set(history, forKey: historyKey)
         }
     }
 
@@ -48,8 +34,20 @@ final class StorageManager {
         }
     }
 
+    func saveImage(_ image: Data, key: String) {
+        UserDefaults.standard.set(image, forKey: key)
+    }
+
     func loadImage(key: String) -> Data? {
         return UserDefaults.standard.data(forKey: key)
+    }
+
+    func saveSearchTerm(_ term: String) {
+        var history = getSearchHistory()
+        if !history.contains(term) {
+            history.insert(term, at: 0)
+            UserDefaults.standard.set(history, forKey: historyKey)
+        }
     }
 
     func getSearchHistory() -> [String] {
