@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol SearchHistoryPresenterProtocol: AnyObject {
-    init(view: SearchHistoryViewProtocol, storageManager: StorageManagerProtocol)
-
-    func loadSearchHistory()
-}
-
 final class SearchHistoryPresenter: SearchHistoryPresenterProtocol {
     weak var view: SearchHistoryViewProtocol?
     private let storageManager: StorageManagerProtocol

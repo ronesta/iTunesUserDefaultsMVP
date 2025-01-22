@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol AlbumPresenterProtocol: AnyObject {
-    func loadAlbumDetails()
-}
-
 class AlbumPresenter: AlbumPresenterProtocol {
     weak var view: AlbumViewProtocol?
     private let networkManager: NetworkManagerProtocol

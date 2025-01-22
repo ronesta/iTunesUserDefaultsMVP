@@ -5,7 +5,7 @@
 //  Created by Ибрагим Габибли on 22.01.2025.
 //
 
-import UIKit
+import Foundation
 
 protocol SearchViewProtocol: AnyObject {
     func updateAlbums(_ albums: [Album])
