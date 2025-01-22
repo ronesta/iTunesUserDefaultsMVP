@@ -19,7 +19,7 @@ final class SearchHistoryViewController: UIViewController {
     }()
 
     var presenter: SearchHistoryPresenterProtocol?
-    var storageManager: StorageManagerProtocol?
+    //var storageManager: StorageManagerProtocol?
     var tableViewDataSource: SearchHistoryDataSourceProtocol?
 
     override func viewDidLoad() {
@@ -72,28 +72,14 @@ extension SearchHistoryViewController: UITableViewDelegate {
     }
 
     func performSearch(for term: String) {
-        guard let storageManager = self.storageManager else {
+        guard let searchViewController = SearchAssembly().build() as? UINavigationController,
+              let rootViewController = searchViewController.viewControllers.first as? SearchViewController else {
             return
         }
 
-        let presenter = SearchPresenter(
-            networkManager: NetworkManager(storageManager: storageManager),
-            storageManager: storageManager
-        )
+        rootViewController.searchBar.isHidden = true
+        rootViewController.presenter?.searchAlbums(with: term)
 
-        let searchViewController = SearchViewController()
-        searchViewController.presenter = presenter
-        presenter.view = searchViewController
-
-        let searchCollectionViewDataSource = SearchCollectionViewDataSource(presenter: presenter)
-
-        searchViewController.storageManager = storageManager
-        searchViewController.collectionViewDataSource = searchCollectionViewDataSource
-
-        searchViewController.searchBar.isHidden = true
-
-        presenter.searchAlbums(with: term)
-
-        navigationController?.pushViewController(searchViewController, animated: true)
+        navigationController?.pushViewController(rootViewController, animated: true)
     }
 }

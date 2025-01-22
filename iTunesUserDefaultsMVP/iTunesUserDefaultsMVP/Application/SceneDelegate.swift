@@ -17,54 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
 
-        // MARK: - Managers
-        let storageManager = StorageManager()
-        let networkManager = NetworkManager(storageManager: storageManager)
-
-        // MARK: - searchViewController & searchPresenter & searchCollectionViewDataSource
-        let searchViewController = SearchViewController()
-        let searchPresenter = SearchPresenter(view: searchViewController,
-                                              networkManager: networkManager,
-                                              storageManager: storageManager
-        )
-
-        let searchCollectionViewDataSource = SearchCollectionViewDataSource(presenter: searchPresenter)
-
-        searchViewController.presenter = searchPresenter
-        searchViewController.storageManager = storageManager
-        searchViewController.collectionViewDataSource = searchCollectionViewDataSource
-
-        let searchNavigationController = UINavigationController(rootViewController: searchViewController)
-        let searchTabBarItem = UITabBarItem(title: "Search",
-                                            image: UIImage(systemName: "magnifyingglass"),
-                                            tag: 0)
-        searchTabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16)], for: .normal)
-        searchNavigationController.tabBarItem = searchTabBarItem
-
-        // MARK: - searchHistoryViewController & searchHistoryPresenter & searchHistoryTableViewDataSource
-        let searchHistoryViewController = SearchHistoryViewController()
-        let searchHistoryPresenter = SearchHistoryPresenter(
-            view: searchHistoryViewController,
-            storageManager: storageManager
-        )
-
-        let searchHistoryTableViewDataSource = SearchHistoryTableViewDataSource()
-
-        searchHistoryViewController.presenter = searchHistoryPresenter
-        searchHistoryViewController.storageManager = storageManager
-        searchHistoryViewController.tableViewDataSource = searchHistoryTableViewDataSource
-
-        let searchHistoryNavigationController = UINavigationController(rootViewController: searchHistoryViewController)
-        let searchHistoryTabBarItem = UITabBarItem(title: "History",
-                                             image: UIImage(systemName: "clock"),
-                                             tag: 1)
-        searchHistoryTabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16)], for: .normal)
-        searchHistoryNavigationController.tabBarItem = searchHistoryTabBarItem
+        let searchModule = SearchAssembly().build()
+        let searchHistoryModule = SearchHistoryAssembly().build()
 
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [searchNavigationController,
-                                            searchHistoryNavigationController]
-
+        tabBarController.viewControllers = [searchModule, searchHistoryModule]
         tabBarController.tabBar.barTintColor = .white
 
         // MARK: - UIWindow

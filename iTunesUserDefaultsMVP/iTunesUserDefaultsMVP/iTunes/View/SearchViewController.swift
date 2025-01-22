@@ -85,19 +85,11 @@ extension SearchViewController: SearchViewProtocol {
 // MARK: - UICollectionViewDelegate
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let album = collectionViewDataSource?.albums[indexPath.item],
-              let storageManager = self.storageManager else {
+        guard let album = collectionViewDataSource?.albums[indexPath.item] else {
             return
         }
 
-        let presenter = AlbumPresenter(
-            networkManager: NetworkManager(storageManager: storageManager),
-            storageManager: storageManager,
-            album: album
-        )
-
-        let albumViewController = AlbumViewController(presenter: presenter)
-        presenter.view = albumViewController
+        let albumViewController = AlbumAssembly().build(with: album)
 
         navigationController?.pushViewController(albumViewController, animated: true)
     }
