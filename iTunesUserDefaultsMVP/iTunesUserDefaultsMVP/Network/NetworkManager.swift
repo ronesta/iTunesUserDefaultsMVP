@@ -12,7 +12,7 @@ final class NetworkManager: NetworkManagerProtocol {
     var dataCounter = 1
     var imageCounter = 1
 
-    private weak var storageManager: StorageManagerProtocol?
+    private var storageManager: StorageManagerProtocol?
 
     init(storageManager: StorageManagerProtocol) {
         self.storageManager = storageManager

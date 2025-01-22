@@ -21,20 +21,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storageManager = StorageManager()
         let networkManager = NetworkManager(storageManager: storageManager)
 
-        // MARK: - searchViewController
+        // MARK: - searchViewController & searchPresenter & searchCollectionViewDataSource
         let searchViewController = SearchViewController()
         let searchPresenter = SearchPresenter(view: searchViewController,
                                               networkManager: networkManager,
                                               storageManager: storageManager
         )
 
-        let searchCollectionViewDataSource = SearchCollectionViewDataSource()
+        let searchCollectionViewDataSource = SearchCollectionViewDataSource(presenter: searchPresenter)
 
         searchViewController.presenter = searchPresenter
         searchViewController.storageManager = storageManager
         searchViewController.collectionViewDataSource = searchCollectionViewDataSource
-        
-        searchCollectionViewDataSource.presenter = searchPresenter
 
         let searchNavigationController = UINavigationController(rootViewController: searchViewController)
         let searchTabBarItem = UITabBarItem(title: "Search",
@@ -43,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         searchTabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16)], for: .normal)
         searchNavigationController.tabBarItem = searchTabBarItem
 
-        // MARK: - searchHistoryViewController
+        // MARK: - searchHistoryViewController & searchHistoryPresenter & searchHistoryTableViewDataSource
         let searchHistoryViewController = SearchHistoryViewController()
         let searchHistoryPresenter = SearchHistoryPresenter(
             view: searchHistoryViewController,
@@ -62,15 +60,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                              tag: 1)
         searchHistoryTabBarItem.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16)], for: .normal)
         searchHistoryNavigationController.tabBarItem = searchHistoryTabBarItem
-
-        // MARK: - albumViewController
-//        let albumViewController = AlbumViewController()
-//        let albumPresenter = AlbumPresenter(view: albumViewController,
-//                                            networkManager: networkManager,
-//                                            storageManager: storageManager
-//        )
-//        albumViewController.presenter = albumPresenter
-//        searchViewController.albumPresenter = albumPresenter
 
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [searchNavigationController,

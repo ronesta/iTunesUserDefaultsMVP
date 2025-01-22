@@ -10,7 +10,11 @@ import UIKit
 
 final class SearchCollectionViewDataSource: NSObject, SearchDataSourceProtocol {
     var albums = [Album]()
-    weak var presenter: SearchPresenterProtocol?
+    var presenter: SearchPresenterProtocol
+
+    init(presenter: SearchPresenterProtocol) {
+        self.presenter = presenter
+    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         albums.count
@@ -28,7 +32,7 @@ final class SearchCollectionViewDataSource: NSObject, SearchDataSourceProtocol {
 
         let album = albums[indexPath.item]
 
-        presenter?.loadImage(for: album) { image in
+        presenter.loadImage(for: album) { image in
             DispatchQueue.main.async {
                 guard let currentCell = collectionView.cellForItem(at: indexPath) as? AlbumCollectionViewCell else {
                     return

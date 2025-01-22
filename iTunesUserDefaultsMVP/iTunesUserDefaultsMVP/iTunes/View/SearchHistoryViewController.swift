@@ -85,8 +85,15 @@ extension SearchHistoryViewController: UITableViewDelegate {
         searchViewController.presenter = presenter
         presenter.view = searchViewController
 
+        let searchCollectionViewDataSource = SearchCollectionViewDataSource(presenter: presenter)
+
+        searchViewController.storageManager = storageManager
+        searchViewController.collectionViewDataSource = searchCollectionViewDataSource
+
         searchViewController.searchBar.isHidden = true
+
         presenter.searchAlbums(with: term)
+
         navigationController?.pushViewController(searchViewController, animated: true)
     }
 }
