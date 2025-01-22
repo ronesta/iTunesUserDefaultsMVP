@@ -8,17 +8,16 @@
 import Foundation
 import UIKit
 
-protocol SearchAssemblyProtocol {
-    func build() -> UIViewController
-}
-
 struct SearchAssembly: SearchAssemblyProtocol {
     func build() -> UIViewController {
         let storageManager = StorageManager()
         let networkManager = NetworkManager(storageManager: storageManager)
         let viewController = SearchViewController()
 
-        let presenter = SearchPresenter(view: viewController, networkManager: networkManager, storageManager: storageManager)
+        let presenter = SearchPresenter(view: viewController,
+                                        networkManager: networkManager,
+                                        storageManager: storageManager
+        )
         let collectionViewDataSource = SearchCollectionViewDataSource(presenter: presenter)
 
         viewController.presenter = presenter
@@ -36,5 +35,3 @@ struct SearchAssembly: SearchAssemblyProtocol {
         return navigationController
     }
 }
-
-

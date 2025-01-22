@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol SearchHistoryViewProtocol: AnyObject {
-    func updateSearchHistory(_ history: [String])
-}
-
 final class SearchHistoryViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -19,7 +15,6 @@ final class SearchHistoryViewController: UIViewController {
     }()
 
     var presenter: SearchHistoryPresenterProtocol?
-    //var storageManager: StorageManagerProtocol?
     var tableViewDataSource: SearchHistoryDataSourceProtocol?
 
     override func viewDidLoad() {
@@ -66,7 +61,7 @@ extension SearchHistoryViewController: UITableViewDelegate {
             print("Search history is empty or nil.")
             return
         }
-        
+
         let selectedTerm = searchHistory[indexPath.row]
         performSearch(for: selectedTerm)
     }

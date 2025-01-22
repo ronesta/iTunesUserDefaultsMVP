@@ -9,10 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 
-protocol AlbumViewProtocol: AnyObject {
-    func displayAlbumDetails(album: Album, image: UIImage)
-}
-
 final class AlbumViewController: UIViewController {
     private let presenter: AlbumPresenterProtocol
 
@@ -54,7 +50,7 @@ final class AlbumViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()

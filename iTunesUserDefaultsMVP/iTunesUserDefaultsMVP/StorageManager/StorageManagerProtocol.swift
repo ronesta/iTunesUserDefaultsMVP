@@ -10,7 +10,7 @@ import Foundation
 protocol StorageManagerProtocol: AnyObject {
     func saveAlbums(_ albums: [Album], for searchTerm: String)
 
-    func loadAlbums(for searchTerm: String) -> [Album]? 
+    func loadAlbums(for searchTerm: String) -> [Album]?
 
     func saveImage(_ image: Data, key: String)
 

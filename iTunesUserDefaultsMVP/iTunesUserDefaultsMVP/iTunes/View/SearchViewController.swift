@@ -8,11 +8,6 @@
 import UIKit
 import SnapKit
 
-protocol SearchViewProtocol: AnyObject {
-    func updateAlbums(_ albums: [Album])
-    func showError(_ message: String)
-}
-
 final class SearchViewController: UIViewController {
     let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -74,7 +69,7 @@ extension SearchViewController: SearchViewProtocol {
         collectionViewDataSource?.albums = albums
         collectionView.reloadData()
     }
-    
+
     func showError(_ message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -107,4 +102,3 @@ extension SearchViewController: UISearchBarDelegate {
         presenter?.searchAlbums(with: searchTerm)
     }
 }
-

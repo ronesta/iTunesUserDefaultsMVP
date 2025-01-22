@@ -17,11 +17,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
 
-        let searchModule = SearchAssembly().build()
-        let searchHistoryModule = SearchHistoryAssembly().build()
+        // MARK: - viewControllers
+        let searchViewController = SearchAssembly().build()
+        let searchHistoryViewController = SearchHistoryAssembly().build()
 
+        // MARK: - UITabBarController
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [searchModule, searchHistoryModule]
+        tabBarController.viewControllers = [searchViewController, searchHistoryViewController]
         tabBarController.tabBar.barTintColor = .white
 
         // MARK: - UIWindow

@@ -8,16 +8,15 @@
 import Foundation
 import UIKit
 
-protocol AlbumAssemblyProtocol {
-    func build(with album: Album) -> UIViewController
-}
-
 struct AlbumAssembly: AlbumAssemblyProtocol {
     func build(with album: Album) -> UIViewController {
         let storageManager = StorageManager()
         let networkManager = NetworkManager(storageManager: storageManager)
 
-        let presenter = AlbumPresenter(networkManager: networkManager, storageManager: storageManager, album: album)
+        let presenter = AlbumPresenter(networkManager: networkManager,
+                                       storageManager: storageManager,
+                                       album: album
+        )
         let albumViewController = AlbumViewController(presenter: presenter)
 
         presenter.view = albumViewController

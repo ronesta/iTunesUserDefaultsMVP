@@ -8,20 +8,17 @@
 import Foundation
 import UIKit
 
-protocol SearchHistoryAssemblyProtocol {
-    func build() -> UIViewController
-}
-
 struct SearchHistoryAssembly: SearchHistoryAssemblyProtocol {
     func build() -> UIViewController {
         let storageManager = StorageManager()
         let viewController = SearchHistoryViewController()
 
-        let presenter = SearchHistoryPresenter(view: viewController, storageManager: storageManager)
+        let presenter = SearchHistoryPresenter(view: viewController,
+                                               storageManager: storageManager
+        )
         let tableViewDataSource = SearchHistoryTableViewDataSource()
 
         viewController.presenter = presenter
-        //viewController.storageManager = storageManager
         viewController.tableViewDataSource = tableViewDataSource
         presenter.view = viewController
 
