@@ -24,7 +24,13 @@ final class SearchPresenter: SearchPresenterProtocol {
         self.storageManager = storageManager
     }
 
+    func viewDidLoad(with term: String) {
+        searchAlbums(with: term)
+    }
+
     func searchAlbums(with term: String) {
+        storageManager.saveSearchTerm(term)
+
         if let savedAlbums = storageManager.loadAlbums(for: term) {
             albums = savedAlbums
             view?.updateAlbums(albums)

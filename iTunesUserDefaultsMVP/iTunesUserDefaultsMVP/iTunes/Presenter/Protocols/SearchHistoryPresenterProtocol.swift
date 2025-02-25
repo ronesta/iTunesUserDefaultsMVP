@@ -10,5 +10,5 @@ import Foundation
 protocol SearchHistoryPresenterProtocol: AnyObject {
     init(view: SearchHistoryViewProtocol, storageManager: StorageManagerProtocol)
 
-    func loadSearchHistory()
+    func viewDidLoad()
 }

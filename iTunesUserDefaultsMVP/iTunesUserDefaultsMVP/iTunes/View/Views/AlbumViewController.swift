@@ -54,7 +54,7 @@ final class AlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        presenter.loadAlbumDetails()
+        presenter.viewDidLoad()
     }
 
     private func setupViews() {

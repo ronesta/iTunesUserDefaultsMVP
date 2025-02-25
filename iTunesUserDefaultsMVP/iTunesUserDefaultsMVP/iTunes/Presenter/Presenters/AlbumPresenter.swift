@@ -24,6 +24,10 @@ class AlbumPresenter: AlbumPresenterProtocol {
         self.album = album
     }
 
+    func viewDidLoad() {
+        loadAlbumDetails()
+    }
+
     func loadAlbumDetails() {
         networkManager.loadImage(from: album.artworkUrl100) { [weak self] loadedImage in
 

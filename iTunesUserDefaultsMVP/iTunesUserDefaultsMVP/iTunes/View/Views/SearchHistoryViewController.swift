@@ -14,8 +14,11 @@ final class SearchHistoryViewController: UIViewController {
         return tableView
     }()
 
+    var onSelect: ((IndexPath) -> Void)?
+
     var presenter: SearchHistoryPresenterProtocol?
     var tableViewDataSource: SearchHistoryDataSourceProtocol?
+    // Cannot be injected with initializer, because presenter also needs CharacterViewController for his initializer
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +28,7 @@ final class SearchHistoryViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.loadSearchHistory()
+        presenter?.viewDidLoad()
     }
 
     private func setupNavigationBar() {
@@ -57,24 +60,6 @@ extension SearchHistoryViewController: SearchHistoryViewProtocol {
 // MARK: - UITableViewDelegate
 extension SearchHistoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let searchHistory = tableViewDataSource?.searchHistory, !searchHistory.isEmpty else {
-            print("Search history is empty or nil.")
-            return
-        }
-
-        let selectedTerm = searchHistory[indexPath.row]
-        performSearch(for: selectedTerm)
-    }
-
-    func performSearch(for term: String) {
-        guard let searchViewController = SearchAssembly().build() as? UINavigationController,
-              let rootViewController = searchViewController.viewControllers.first as? SearchViewController else {
-            return
-        }
-
-        rootViewController.searchBar.isHidden = true
-        rootViewController.presenter?.searchAlbums(with: term)
-
-        navigationController?.pushViewController(rootViewController, animated: true)
+        onSelect?(indexPath)
     }
 }
