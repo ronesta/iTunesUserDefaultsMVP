@@ -15,10 +15,12 @@ final class AlbumPresenter: AlbumPresenterProtocol {
 
     private let album: Album
 
-    init(networkManager: NetworkManagerProtocol,
+    init(view: AlbumViewProtocol?,
+         networkManager: NetworkManagerProtocol,
          storageManager: StorageManagerProtocol,
          album: Album
     ) {
+        self.view = view
         self.networkManager = networkManager
         self.storageManager = storageManager
         self.album = album
@@ -31,11 +33,12 @@ final class AlbumPresenter: AlbumPresenterProtocol {
     func loadAlbumDetails() {
         networkManager.loadImage(from: album.artworkUrl100) { [weak self] loadedImage in
 
-            guard let self else {
+            guard let self,
+                  let loadedImage else {
                 return
             }
 
-            view?.displayAlbumDetails(album: album, image: loadedImage ?? UIImage())
+            view?.displayAlbumDetails(album: album, image: loadedImage)
         }
     }
 }

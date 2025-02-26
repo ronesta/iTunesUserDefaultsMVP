@@ -8,17 +8,17 @@
 import UIKit
 
 final class SearchHistoryViewController: UIViewController {
-    private let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.separatorStyle = .singleLine
-        return tableView
-    }()
-
     var onSelect: ((IndexPath) -> Void)?
 
     var presenter: SearchHistoryPresenterProtocol?
     var tableViewDataSource: SearchHistoryDataSourceProtocol?
     // Cannot be injected with initializer, because presenter also needs CharacterViewController for his initializer
+
+    private let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.separatorStyle = .singleLine
+        return tableView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()

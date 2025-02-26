@@ -20,7 +20,6 @@ struct SearchHistoryAssembly {
 
         viewController.presenter = presenter
         viewController.tableViewDataSource = tableViewDataSource
-        presenter.view = viewController
 
         configureOnSelect(for: viewController, with: tableViewDataSource)
 
