@@ -15,7 +15,7 @@ final class SearchPresenter: SearchPresenterProtocol {
 
     private var albums = [Album]()
 
-    init(view: SearchViewProtocol? = nil,
+    init(view: SearchViewProtocol?,
          networkManager: NetworkManagerProtocol,
          storageManager: StorageManagerProtocol
     ) {

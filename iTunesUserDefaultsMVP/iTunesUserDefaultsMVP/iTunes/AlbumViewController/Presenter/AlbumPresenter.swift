@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AlbumPresenter: AlbumPresenterProtocol {
+final class AlbumPresenter: AlbumPresenterProtocol {
     weak var view: AlbumViewProtocol?
     private let networkManager: NetworkManagerProtocol
     private let storageManager: StorageManagerProtocol

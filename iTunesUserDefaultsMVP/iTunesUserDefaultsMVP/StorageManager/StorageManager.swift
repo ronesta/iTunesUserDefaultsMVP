@@ -21,17 +21,12 @@ final class StorageManager: StorageManagerProtocol {
     }
 
     func loadAlbums(for searchTerm: String) -> [Album]? {
-        if let data = UserDefaults.standard.data(forKey: searchTerm) {
-            do {
-                let albums = try JSONDecoder().decode([Album].self, from: data)
-                return albums
-            } catch {
-                print("Failed to encode: \(error)")
-                return nil
-            }
-        } else {
+        guard let data = UserDefaults.standard.data(forKey: searchTerm),
+              let albums = try? JSONDecoder().decode([Album].self, from: data) else {
             return nil
         }
+
+        return albums
     }
 
     func saveImage(_ image: Data, key: String) {
