@@ -10,5 +10,6 @@ import UIKit
 
 protocol SearchPresenterProtocol: AnyObject {
     func viewDidLoad(with term: String)
+    
     func loadImage(for album: Album, completion: @escaping (UIImage?) -> Void)
 }

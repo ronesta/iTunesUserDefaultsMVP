@@ -44,17 +44,12 @@ final class SearchPresenter: SearchPresenterProtocol {
 
             switch result {
             case .success(let albums):
-                DispatchQueue.main.async {
-                    self.albums = albums.sorted { $0.collectionName < $1.collectionName }
-                    self.view?.updateAlbums(self.albums)
-                    self.storageManager.saveSearchTerm(term)
-                    self.storageManager.saveAlbums(albums, for: term)
-                    print("Successfully loaded \(albums.count) albums.")
-                }
+                self.albums = albums.sorted { $0.collectionName < $1.collectionName }
+                self.view?.updateAlbums(self.albums)
+                self.storageManager.saveAlbums(albums, for: term)
+                print("Successfully loaded \(albums.count) albums.")
             case .failure(let error):
-                DispatchQueue.main.async {
-                    self.view?.showError(error.localizedDescription)
-                }
+                self.view?.showError(error.localizedDescription)
             }
         }
     }
