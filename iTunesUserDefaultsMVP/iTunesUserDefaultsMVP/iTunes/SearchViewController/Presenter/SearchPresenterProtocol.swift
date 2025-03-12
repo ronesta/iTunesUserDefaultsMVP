@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol SearchPresenterProtocol: AnyObject {
-    func viewDidLoad(with term: String)
-    
-    func loadImage(for album: Album, completion: @escaping (UIImage?) -> Void)
+    func didTypeSearch(_ searchQuery: String)
+    func searchButtonClicked(with term: String?)
+    func searchFromHistory(with term: String)
 }

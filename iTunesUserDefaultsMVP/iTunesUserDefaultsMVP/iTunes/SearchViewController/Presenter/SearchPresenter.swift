@@ -10,34 +10,52 @@ import UIKit
 
 final class SearchPresenter: SearchPresenterProtocol {
     weak var view: SearchViewProtocol?
-    private let networkManager: NetworkManagerProtocol
+
+    private let iTunesService: ITunesServiceProtocol
     private let storageManager: StorageManagerProtocol
 
     private var albums = [Album]()
 
-    init(view: SearchViewProtocol?,
-         networkManager: NetworkManagerProtocol,
+    init(iTunesService: ITunesServiceProtocol,
          storageManager: StorageManagerProtocol
     ) {
-        self.view = view
-        self.networkManager = networkManager
+        self.iTunesService = iTunesService
         self.storageManager = storageManager
     }
 
-    func viewDidLoad(with term: String) {
+    private func saveSearchTerm(_ term: String) {
+        storageManager.saveSearchTerm(term)
+    }
+
+    func didTypeSearch(_ searchQuery: String) {
+        guard !searchQuery.isEmpty else {
+            return
+        }
+
+        searchAlbums(with: searchQuery)
+    }
+
+    func searchButtonClicked(with term: String?) {
+        guard let term, !term.isEmpty else {
+            return
+        }
+
+        saveSearchTerm(term)
+        searchAlbums(with: term)
+    }
+
+    func searchFromHistory(with term: String) {
         searchAlbums(with: term)
     }
 
     func searchAlbums(with term: String) {
-        storageManager.saveSearchTerm(term)
-
         if let savedAlbums = storageManager.loadAlbums(for: term) {
             albums = savedAlbums
             view?.updateAlbums(albums)
             return
         }
 
-        networkManager.loadAlbums(albumName: term) { [weak self] result in
+        iTunesService.loadAlbums(albumName: term) { [weak self] result in
             guard let self else {
                 return
             }
@@ -52,9 +70,5 @@ final class SearchPresenter: SearchPresenterProtocol {
                 self.view?.showError(error.localizedDescription)
             }
         }
-    }
-
-    func loadImage(for album: Album, completion: @escaping (UIImage?) -> Void) {
-        networkManager.loadImage(from: album.artworkUrl100, completion: completion)
     }
 }

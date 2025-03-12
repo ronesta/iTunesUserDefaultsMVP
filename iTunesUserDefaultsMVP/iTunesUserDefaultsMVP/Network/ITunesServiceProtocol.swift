@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-protocol NetworkManagerProtocol: AnyObject {
+protocol ITunesServiceProtocol: AnyObject {
     func loadAlbums(albumName: String, completion: @escaping (Result<[Album], Error>) -> Void)
-
-    func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void)
 }

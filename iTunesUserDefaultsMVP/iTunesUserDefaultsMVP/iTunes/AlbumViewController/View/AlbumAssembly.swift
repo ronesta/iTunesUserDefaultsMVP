@@ -11,17 +11,15 @@ import UIKit
 struct AlbumAssembly {
     func build(with album: Album) -> UIViewController {
         let storageManager = StorageManager()
-        let networkManager = NetworkManager(storageManager: storageManager)
+        let imageLoader = ImageLoader(storageManager: storageManager)
 
-        let albumViewController = AlbumViewController()
-
-        let presenter = AlbumPresenter(view: albumViewController,
-                                       networkManager: networkManager,
-                                       storageManager: storageManager,
+        let presenter = AlbumPresenter(imageLoader: imageLoader,
                                        album: album
         )
 
-        albumViewController.presenter = presenter
+        let albumViewController = AlbumViewController(presenter: presenter)
+
+        presenter.view = albumViewController
 
         return albumViewController
     }

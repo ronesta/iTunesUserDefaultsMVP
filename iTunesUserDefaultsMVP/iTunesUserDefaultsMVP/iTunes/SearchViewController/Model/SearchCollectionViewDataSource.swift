@@ -10,10 +10,11 @@ import UIKit
 
 final class SearchCollectionViewDataSource: NSObject, SearchDataSourceProtocol {
     var albums = [Album]()
-    private let presenter: SearchPresenterProtocol
 
-    init(presenter: SearchPresenterProtocol) {
-        self.presenter = presenter
+    private let imageLoader: ImageLoaderProtocol
+
+    init(imageLoader: ImageLoaderProtocol) {
+        self.imageLoader = imageLoader
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,12 +33,12 @@ final class SearchCollectionViewDataSource: NSObject, SearchDataSourceProtocol {
 
         let album = albums[indexPath.item]
 
-        presenter.loadImage(for: album) { image in
+        imageLoader.loadImage(from: album.artworkUrl100) { image in
             DispatchQueue.main.async {
                 guard let currentCell = collectionView.cellForItem(at: indexPath) as? AlbumCollectionViewCell else {
                     return
                 }
-
+                
                 currentCell.configure(with: album, image: image)
             }
         }

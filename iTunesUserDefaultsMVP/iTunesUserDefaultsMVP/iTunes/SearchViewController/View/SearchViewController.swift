@@ -9,13 +9,7 @@ import UIKit
 import SnapKit
 
 final class SearchViewController: UIViewController {
-    var onSelect: ((IndexPath) -> Void)?
-
-    var presenter: SearchPresenterProtocol?
-    var collectionViewDataSource: SearchDataSourceProtocol?
-    // Cannot be injected with initializer, because presenter also needs CharacterViewController for his initializer
-
-    let searchBar: UISearchBar = {
+    private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = "Search Albums"
@@ -41,6 +35,23 @@ final class SearchViewController: UIViewController {
 
         return collectionView
     }()
+
+    var onSelect: ((IndexPath) -> Void)?
+
+    private let presenter: SearchPresenterProtocol
+    private let collectionViewDataSource: SearchDataSourceProtocol
+
+    init(presenter: SearchPresenterProtocol,
+         collectionViewDataSource: SearchDataSourceProtocol
+    ) {
+        self.presenter = presenter
+        self.collectionViewDataSource = collectionViewDataSource
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +79,7 @@ final class SearchViewController: UIViewController {
 // MARK: - SearchViewProtocol
 extension SearchViewController: SearchViewProtocol {
     func updateAlbums(_ albums: [Album]) {
-        collectionViewDataSource?.albums = albums
+        collectionViewDataSource.albums = albums
         collectionView.reloadData()
     }
 
@@ -86,14 +97,22 @@ extension SearchViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - SearchViewInputProtocol
+extension SearchViewController: SearchViewInputProtocol {
+    func performSearch(with term: String) {
+        searchBar.isHidden = true
+        presenter.searchFromHistory(with: term)
+    }
+}
+
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {
-            return
-        }
+        presenter.searchButtonClicked(with: searchBar.text)
+    }
 
-        presenter?.viewDidLoad(with: searchTerm)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.didTypeSearch(searchText)
     }
 }

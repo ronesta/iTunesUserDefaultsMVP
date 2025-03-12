@@ -11,19 +11,21 @@ import UIKit
 struct SearchHistoryAssembly {
     func build() -> UIViewController {
         let storageManager = StorageManager()
-        let viewController = SearchHistoryViewController()
 
-        let presenter = SearchHistoryPresenter(view: viewController,
-                                               storageManager: storageManager
-        )
+        let presenter = SearchHistoryPresenter(storageManager: storageManager)
         let tableViewDataSource = SearchHistoryTableViewDataSource()
 
-        viewController.presenter = presenter
-        viewController.tableViewDataSource = tableViewDataSource
+        let viewController = SearchHistoryViewController(presenter: presenter,
+                                                         tableViewDataSource: tableViewDataSource
+        )
 
-        configureOnSelect(for: viewController, with: tableViewDataSource)
+        presenter.view = viewController
 
         let navigationController = UINavigationController(rootViewController: viewController)
+        let coordinator = SearchHistoryCoordinator(navigationController: navigationController)
+
+        configureOnSelect(for: viewController, with: tableViewDataSource, coordinator: coordinator)
+
         let tabBarItem = UITabBarItem(title: "History",
                                       image: UIImage(systemName: "clock"),
                                       tag: 1)
@@ -34,21 +36,12 @@ struct SearchHistoryAssembly {
     }
 
     private func configureOnSelect(for viewController: SearchHistoryViewController,
-                                   with tableViewDataSource: SearchHistoryTableViewDataSource
+                                   with tableViewDataSource: SearchHistoryTableViewDataSource,
+                                   coordinator: SearchHistoryCoordinatorProtocol
     ) {
-        viewController.onSelect = { [weak viewController] indexPath in
+        viewController.onSelect = { indexPath in
             let selectedTerm = tableViewDataSource.searchHistory[indexPath.row]
-            let searchAssembly = SearchAssembly()
-
-            guard let searchViewController = searchAssembly.build() as? UINavigationController,
-                  let rootViewController = searchViewController.viewControllers.first as? SearchViewController else {
-                return
-            }
-
-            rootViewController.searchBar.isHidden = true
-            rootViewController.presenter?.viewDidLoad(with: selectedTerm)
-
-            viewController?.navigationController?.pushViewController(rootViewController, animated: true)
+            coordinator.didSelectSearchQuery(with: selectedTerm)
         }
     }
 }
