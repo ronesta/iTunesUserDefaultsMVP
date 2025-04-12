@@ -14,10 +14,10 @@ final class SearchHistoryViewController: UIViewController {
         return tableView
     }()
 
-    var onSelect: ((IndexPath) -> Void)?
-
     private let presenter: SearchHistoryPresenterProtocol
     private let tableViewDataSource: SearchHistoryDataSourceProtocol
+
+    var onSelect: ((IndexPath) -> Void)?
 
     init(presenter: SearchHistoryPresenterProtocol,
          tableViewDataSource: SearchHistoryDataSourceProtocol

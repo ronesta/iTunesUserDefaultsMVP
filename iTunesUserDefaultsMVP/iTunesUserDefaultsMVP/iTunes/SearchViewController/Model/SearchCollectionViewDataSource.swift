@@ -38,7 +38,7 @@ final class SearchCollectionViewDataSource: NSObject, SearchDataSourceProtocol {
                 guard let currentCell = collectionView.cellForItem(at: indexPath) as? AlbumCollectionViewCell else {
                     return
                 }
-                
+
                 currentCell.configure(with: album, image: image)
             }
         }

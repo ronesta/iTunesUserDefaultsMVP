@@ -36,10 +36,10 @@ final class SearchViewController: UIViewController {
         return collectionView
     }()
 
-    var onSelect: ((IndexPath) -> Void)?
-
     private let presenter: SearchPresenterProtocol
     private let collectionViewDataSource: SearchDataSourceProtocol
+
+    var onSelect: ((IndexPath) -> Void)?
 
     init(presenter: SearchPresenterProtocol,
          collectionViewDataSource: SearchDataSourceProtocol

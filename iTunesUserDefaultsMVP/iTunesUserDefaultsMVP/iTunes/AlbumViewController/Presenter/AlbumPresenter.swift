@@ -25,7 +25,7 @@ final class AlbumPresenter: AlbumPresenterProtocol {
         loadAlbumDetails()
     }
 
-    func loadAlbumDetails() {
+    private func loadAlbumDetails() {
         imageLoader.loadImage(from: album.artworkUrl100) { [weak self] loadedImage in
 
             guard let self,

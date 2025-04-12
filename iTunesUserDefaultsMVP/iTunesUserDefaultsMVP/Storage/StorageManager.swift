@@ -48,20 +48,4 @@ final class StorageManager: StorageManagerProtocol {
     func getSearchHistory() -> [String] {
         return UserDefaults.standard.array(forKey: historyKey) as? [String] ?? []
     }
-
-    func clearAlbums() {
-        let history = getSearchHistory()
-        for term in history {
-            UserDefaults.standard.removeObject(forKey: term)
-        }
-        clearHistory()
-    }
-
-    func clearImage(key: String) {
-        UserDefaults.standard.removeObject(forKey: key)
-    }
-
-    func clearHistory() {
-        UserDefaults.standard.removeObject(forKey: historyKey)
-    }
 }

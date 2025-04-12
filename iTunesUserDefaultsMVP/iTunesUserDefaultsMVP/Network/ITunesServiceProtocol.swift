@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 protocol ITunesServiceProtocol: AnyObject {
     func loadAlbums(albumName: String, completion: @escaping (Result<[Album], Error>) -> Void)

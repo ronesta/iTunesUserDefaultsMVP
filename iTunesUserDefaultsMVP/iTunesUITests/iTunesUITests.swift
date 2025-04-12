@@ -8,36 +8,72 @@
 import XCTest
 
 final class iTunesUITests: XCTestCase {
+    private var app: XCUIApplication!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
+        app = XCUIApplication()
+        app.launch()
+    }
 
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+    func testSearchBarExistsAndIsFunctional() {
+        let searchBar = app.searchFields["Search Albums"]
+
+        XCTAssertTrue(searchBar.exists)
+
+        searchBar.tap()
+        searchBar.typeText("Test Album")
+
+        XCTAssertFalse(app.keyboards.element.exists)
+    }
+
+    func testCollectionViewExists() throws {
+        let collectionView = app.collectionViews.firstMatch
+
+        XCTAssertTrue(collectionView.exists)
+    }
+
+    func testCollectionViewDisplaysResults() {
+        performSearch(with: "Album")
+
+        let collectionView = app.collectionViews.element
+
+        waitForCellsToAppear(in: collectionView)
+
+        XCTAssertTrue(collectionView.cells.count > 0)
+    }
+
+    func testTappingOnCollectionViewCellTriggersOnSelect() {
+        performSearch(with: "Sample Album")
+
+        let firstCell = app.collectionViews.cells.element(boundBy: 0)
+
+        XCTAssertTrue(firstCell.waitForExistence(timeout: 5))
+
+        let albumImageView = firstCell.images["albumImageView"]
+        let albumNameLabel = firstCell.staticTexts["albumNameLabel"]
+        let artistNameLabel = firstCell.staticTexts["artistNameLabel"]
+
+        XCTAssertTrue(albumImageView.exists)
+        XCTAssertTrue(albumNameLabel.exists)
+        XCTAssertTrue(artistNameLabel.exists)
+
+        firstCell.tap()
+    }
+
+    private func performSearch(with text: String) {
+        let searchBar = app.searchFields["Search Albums"]
+        searchBar.tap()
+        searchBar.typeText("\(text)")
+    }
+
+    private func waitForCellsToAppear(in collectionView: XCUIElement) {
+        let cellsPredicate = NSPredicate(format: "cells.count > 0")
+        expectation(for: cellsPredicate, evaluatedWith: collectionView, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        app = nil
     }
 }

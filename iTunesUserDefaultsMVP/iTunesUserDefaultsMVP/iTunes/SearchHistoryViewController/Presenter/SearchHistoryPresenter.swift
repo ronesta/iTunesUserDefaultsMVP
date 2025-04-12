@@ -20,7 +20,7 @@ final class SearchHistoryPresenter: SearchHistoryPresenterProtocol {
         loadSearchHistory()
     }
 
-    func loadSearchHistory() {
+    private func loadSearchHistory() {
         let history = storageManager.getSearchHistory()
         view?.updateSearchHistory(history)
     }
