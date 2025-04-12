@@ -15,6 +15,7 @@ final class AlbumViewController: UIViewController {
         image.layer.cornerRadius = 15
         image.clipsToBounds = true
         image.contentMode = .scaleToFill
+        image.accessibilityIdentifier = "albumImageView"
         return image
     }()
 
@@ -23,6 +24,7 @@ final class AlbumViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.numberOfLines = 3
         label.textAlignment = .center
+        label.accessibilityIdentifier = "albumNameLabel"
         return label
     }()
 
@@ -30,6 +32,7 @@ final class AlbumViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .systemGray
+        label.accessibilityIdentifier = "artistNameLabel"
         return label
     }()
 
@@ -37,6 +40,7 @@ final class AlbumViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .systemOrange
+        label.accessibilityIdentifier = "collectionPriceLabel"
         return label
     }()
 

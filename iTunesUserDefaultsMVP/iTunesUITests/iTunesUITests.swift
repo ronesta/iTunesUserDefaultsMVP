@@ -16,7 +16,8 @@ final class iTunesUITests: XCTestCase {
         app.launch()
     }
 
-    func testSearchBarExistsAndIsFunctional() {
+    // MARK: - SearchViewController
+    func testSearchBarExistsAndWorks() {
         let searchBar = app.searchFields["Search Albums"]
 
         XCTAssertTrue(searchBar.exists)
@@ -43,7 +44,7 @@ final class iTunesUITests: XCTestCase {
         XCTAssertTrue(collectionView.cells.count > 0)
     }
 
-    func testTappingOnCollectionViewCellTriggersOnSelect() {
+    func testCollectionViewCellExists() {
         performSearch(with: "Sample Album")
 
         let firstCell = app.collectionViews.cells.element(boundBy: 0)
@@ -57,18 +58,55 @@ final class iTunesUITests: XCTestCase {
         XCTAssertTrue(albumImageView.exists)
         XCTAssertTrue(albumNameLabel.exists)
         XCTAssertTrue(artistNameLabel.exists)
-
-        firstCell.tap()
     }
 
+    // MARK: - AlbumViewController
+    func testAlbumDetailsAreDisplayedCorrectly() throws {
+        performSearch(with: "Sample Album")
+
+        let firstCell = app.collectionViews.cells.element(boundBy: 0)
+        firstCell.tap()
+
+        let albumImageView = app.images["albumImageView"]
+        let albumNameLabel = app.staticTexts["albumNameLabel"]
+        let artistNameLabel = app.staticTexts["artistNameLabel"]
+        let collectionPriceLabel = app.staticTexts["collectionPriceLabel"]
+
+        XCTAssertTrue(albumImageView.exists)
+        XCTAssertTrue(albumNameLabel.exists)
+        XCTAssertTrue(artistNameLabel.exists)
+        XCTAssertTrue(collectionPriceLabel.exists)
+
+        XCTAssertFalse(albumNameLabel.label.isEmpty)
+        XCTAssertFalse(artistNameLabel.label.isEmpty)
+        XCTAssertFalse(collectionPriceLabel.label.isEmpty)
+    }
+
+    // MARK: - SearchHistoryViewController
+    func testSearchHistoryAreDisplayedCorrectly() {
+        let tabBar = app.tabBars.firstMatch
+        let historyTabButton = tabBar.buttons["History"]
+
+        XCTAssertTrue(historyTabButton.exists)
+
+        historyTabButton.tap()
+
+        let tableView = app.tables.element(matching: .table, identifier: "searchHistoryTableView")
+
+        XCTAssertTrue(tableView.exists)
+    }
+
+    // MARK: - Support functions
     private func performSearch(with text: String) {
         let searchBar = app.searchFields["Search Albums"]
+
         searchBar.tap()
         searchBar.typeText("\(text)")
     }
 
     private func waitForCellsToAppear(in collectionView: XCUIElement) {
         let cellsPredicate = NSPredicate(format: "cells.count > 0")
+
         expectation(for: cellsPredicate, evaluatedWith: collectionView, handler: nil)
         waitForExpectations(timeout: 5, handler: nil)
     }
