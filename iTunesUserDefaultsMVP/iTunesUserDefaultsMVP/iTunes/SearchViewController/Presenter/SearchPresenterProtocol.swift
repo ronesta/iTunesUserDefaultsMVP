@@ -10,6 +10,8 @@ import UIKit
 
 protocol SearchPresenterProtocol: AnyObject {
     func didTypeSearch(_ searchQuery: String)
+
     func searchButtonClicked(with term: String?)
+
     func searchFromHistory(with term: String)
 }
