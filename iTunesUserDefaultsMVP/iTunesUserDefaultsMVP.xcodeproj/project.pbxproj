@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E11D9ED42DAC32AB00C2DC63 /* ViewControllerPresentationSpy in Frameworks */ = {isa = PBXBuildFile; productRef = E11D9ED32DAC32AB00C2DC63 /* ViewControllerPresentationSpy */; };
+		E11D9ED72DAC3D0700C2DC63 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = E11D9ED62DAC3D0700C2DC63 /* InlineSnapshotTesting */; };
+		E11D9ED92DAC3D0700C2DC63 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = E11D9ED82DAC3D0700C2DC63 /* SnapshotTesting */; };
+		E11D9EDB2DAC3D0700C2DC63 /* SnapshotTestingCustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = E11D9EDA2DAC3D0700C2DC63 /* SnapshotTestingCustomDump */; };
 		E1A81E222D305C2000A199A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E1A81E212D305C2000A199A4 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11D9EDB2DAC3D0700C2DC63 /* SnapshotTestingCustomDump in Frameworks */,
+				E11D9ED92DAC3D0700C2DC63 /* SnapshotTesting in Frameworks */,
+				E11D9ED72DAC3D0700C2DC63 /* InlineSnapshotTesting in Frameworks */,
 				E11D9ED42DAC32AB00C2DC63 /* ViewControllerPresentationSpy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +140,9 @@
 			name = iTunesTests;
 			packageProductDependencies = (
 				E11D9ED32DAC32AB00C2DC63 /* ViewControllerPresentationSpy */,
+				E11D9ED62DAC3D0700C2DC63 /* InlineSnapshotTesting */,
+				E11D9ED82DAC3D0700C2DC63 /* SnapshotTesting */,
+				E11D9EDA2DAC3D0700C2DC63 /* SnapshotTestingCustomDump */,
 			);
 			productName = iTunesTests;
 			productReference = E198E2DF2DAAD221009DB15E /* iTunesTests.xctest */;
@@ -221,6 +230,7 @@
 			packageReferences = (
 				E1A81E202D305C2000A199A4 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E11D9ED22DAC32AB00C2DC63 /* XCRemoteSwiftPackageReference "ViewControllerPresentationSpy" */,
+				E11D9ED52DAC3D0600C2DC63 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E1A81E092D305C0C00A199A4 /* Products */;
@@ -405,8 +415,8 @@
 				INFOPLIST_FILE = iTunesUserDefaultsMVP/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -414,9 +424,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ronesta.iTunesUserDefaultsMVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -432,8 +446,8 @@
 				INFOPLIST_FILE = iTunesUserDefaultsMVP/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -441,9 +455,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ronesta.iTunesUserDefaultsMVP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -616,6 +634,14 @@
 				kind = branch;
 			};
 		};
+		E11D9ED52DAC3D0600C2DC63 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.3;
+			};
+		};
 		E1A81E202D305C2000A199A4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -631,6 +657,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E11D9ED22DAC32AB00C2DC63 /* XCRemoteSwiftPackageReference "ViewControllerPresentationSpy" */;
 			productName = ViewControllerPresentationSpy;
+		};
+		E11D9ED62DAC3D0700C2DC63 /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11D9ED52DAC3D0600C2DC63 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		E11D9ED82DAC3D0700C2DC63 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11D9ED52DAC3D0600C2DC63 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		E11D9EDA2DAC3D0700C2DC63 /* SnapshotTestingCustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11D9ED52DAC3D0600C2DC63 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTestingCustomDump;
 		};
 		E1A81E212D305C2000A199A4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

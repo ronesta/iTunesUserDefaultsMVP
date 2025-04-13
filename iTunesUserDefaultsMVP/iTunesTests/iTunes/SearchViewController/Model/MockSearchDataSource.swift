@@ -26,8 +26,9 @@ final class MockSearchDataSource: NSObject, SearchDataSourceProtocol {
         }
 
         let album = albums[indexPath.item]
+        let image = UIImage(systemName: "checkmark.diamond")
 
-        cell.configure(with: album, image: nil)
+        cell.configure(with: album, image: image)
 
         return cell
     }
