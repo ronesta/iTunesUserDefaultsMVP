@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E11D9ED42DAC32AB00C2DC63 /* ViewControllerPresentationSpy in Frameworks */ = {isa = PBXBuildFile; productRef = E11D9ED32DAC32AB00C2DC63 /* ViewControllerPresentationSpy */; };
 		E1A81E222D305C2000A199A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E1A81E212D305C2000A199A4 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11D9ED42DAC32AB00C2DC63 /* ViewControllerPresentationSpy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +133,7 @@
 			);
 			name = iTunesTests;
 			packageProductDependencies = (
+				E11D9ED32DAC32AB00C2DC63 /* ViewControllerPresentationSpy */,
 			);
 			productName = iTunesTests;
 			productReference = E198E2DF2DAAD221009DB15E /* iTunesTests.xctest */;
@@ -217,6 +220,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				E1A81E202D305C2000A199A4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E11D9ED22DAC32AB00C2DC63 /* XCRemoteSwiftPackageReference "ViewControllerPresentationSpy" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E1A81E092D305C0C00A199A4 /* Products */;
@@ -604,6 +608,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E11D9ED22DAC32AB00C2DC63 /* XCRemoteSwiftPackageReference "ViewControllerPresentationSpy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonreid/ViewControllerPresentationSpy";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		E1A81E202D305C2000A199A4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -615,6 +627,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E11D9ED32DAC32AB00C2DC63 /* ViewControllerPresentationSpy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E11D9ED22DAC32AB00C2DC63 /* XCRemoteSwiftPackageReference "ViewControllerPresentationSpy" */;
+			productName = ViewControllerPresentationSpy;
+		};
 		E1A81E212D305C2000A199A4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E1A81E202D305C2000A199A4 /* XCRemoteSwiftPackageReference "SnapKit" */;
