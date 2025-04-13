@@ -96,6 +96,23 @@ final class iTunesUITests: XCTestCase {
         XCTAssertTrue(tableView.exists)
     }
 
+    func testSelectingHistoryItemDisplaysResults() {
+        let tabBar = app.tabBars.firstMatch
+        let historyTabButton = tabBar.buttons["History"]
+
+        historyTabButton.tap()
+
+        let tableView = app.tables.element(matching: .table, identifier: "searchHistoryTableView")
+        let firstCell = tableView.cells.element(boundBy: 0)
+
+        XCTAssertTrue(firstCell.exists)
+        firstCell.tap()
+
+        let collectionView = app.collectionViews.firstMatch
+
+        XCTAssertTrue(collectionView.exists)
+    }
+
     // MARK: - Support functions
     private func performSearch(with text: String) {
         let searchBar = app.searchFields["Search Albums"]
