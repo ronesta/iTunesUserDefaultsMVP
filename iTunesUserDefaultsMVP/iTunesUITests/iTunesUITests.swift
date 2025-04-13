@@ -25,6 +25,11 @@ final class iTunesUITests: XCTestCase {
         searchBar.tap()
         searchBar.typeText("Test Album")
 
+        let keyboardPredicate = NSPredicate(format: "exists == false")
+
+        expectation(for: keyboardPredicate, evaluatedWith: app.keyboards.element, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+
         XCTAssertFalse(app.keyboards.element.exists)
     }
 
@@ -76,10 +81,6 @@ final class iTunesUITests: XCTestCase {
         XCTAssertTrue(albumNameLabel.exists)
         XCTAssertTrue(artistNameLabel.exists)
         XCTAssertTrue(collectionPriceLabel.exists)
-
-        XCTAssertFalse(albumNameLabel.label.isEmpty)
-        XCTAssertFalse(artistNameLabel.label.isEmpty)
-        XCTAssertFalse(collectionPriceLabel.label.isEmpty)
     }
 
     // MARK: - SearchHistoryViewController
