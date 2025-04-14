@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class AlbumViewController: UIViewController {
-    private let albumImageView: UIImageView = {
+    let albumImageView: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 15
         image.clipsToBounds = true
@@ -19,7 +19,7 @@ final class AlbumViewController: UIViewController {
         return image
     }()
 
-    private let albumNameLabel: UILabel = {
+    let albumNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.numberOfLines = 3
@@ -28,7 +28,7 @@ final class AlbumViewController: UIViewController {
         return label
     }()
 
-    private let artistNameLabel: UILabel = {
+    let artistNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .systemGray
@@ -36,7 +36,7 @@ final class AlbumViewController: UIViewController {
         return label
     }()
 
-    private let collectionPriceLabel: UILabel = {
+    let collectionPriceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .systemOrange
