@@ -31,7 +31,7 @@ final class MockStorageManager: StorageManagerProtocol {
 
     func saveSearchTerm(_ term: String) {
         if !searchHistory.contains(term) {
-            searchHistory.insert(term, at: 0)
+            searchHistory.append(term)
         }
     }
 
