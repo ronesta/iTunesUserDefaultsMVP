@@ -10,9 +10,9 @@ import SnapshotTesting
 @testable import iTunesUserDefaultsMVP
 
 final class SearchHistoryViewControllerSnapshotTests: XCTestCase {
-    var viewController: SearchHistoryViewController!
-    var mockPresenter: MockSearchHistoryPresenter!
-    var mockDataSource: MockSearchHistoryDataSource!
+    private var viewController: SearchHistoryViewController!
+    private var mockPresenter: MockSearchHistoryPresenter!
+    private var mockDataSource: MockSearchHistoryDataSource!
 
     override func setUp() {
         super.setUp()
@@ -31,13 +31,13 @@ final class SearchHistoryViewControllerSnapshotTests: XCTestCase {
         super.tearDown()
     }
 
-    func testSnapshotInitialView() {
+    func testDefaultAppearance() {
         let navigationController = UINavigationController(rootViewController: viewController)
 
         assertSnapshot(of: navigationController, as: .image)
     }
 
-    func testSnapshotWithUpdatedData() {
+    func testAppearanceWithUpdatedData() {
         let searchHistory = ["Search1", "Search2"]
 
         let navigationController = UINavigationController(rootViewController: viewController)
