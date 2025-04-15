@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 final class StorageManager: StorageManagerProtocol {
     private let historyKey = "searchHistory"
