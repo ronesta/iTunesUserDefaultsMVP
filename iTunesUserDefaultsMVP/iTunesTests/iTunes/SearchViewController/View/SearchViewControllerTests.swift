@@ -87,4 +87,31 @@ final class SearchViewControllerTests: XCTestCase {
             presentingViewController: viewController
         )
     }
+
+    func testPerformSearchHidesSearchBarAndCallsPresenter() {
+        let term = "SomeTerm"
+
+        viewController.searchBar.isHidden = false
+        viewController.performSearch(with: term)
+
+        XCTAssertTrue(viewController.searchBar.isHidden)
+        XCTAssertEqual(mockPresenter.searchFromHistoryTerm, term)
+    }
+
+    func testSearchBarSearchButtonClickedCallsPresenter() {
+        let term = "SomeTerm"
+
+        viewController.searchBar.text = term
+        viewController.searchBarSearchButtonClicked(viewController.searchBar)
+
+        XCTAssertEqual(mockPresenter.searchButtonClickedTerm, term)
+    }
+
+    func testSearchBarTextDidChangeCallsPresenterWithCorrectText() {
+        let term = "SomeTerm"
+
+        viewController.searchBar(viewController.searchBar, textDidChange: term)
+
+        XCTAssertEqual(mockPresenter.didTypeSearchQuery, term)
+    }
 }
