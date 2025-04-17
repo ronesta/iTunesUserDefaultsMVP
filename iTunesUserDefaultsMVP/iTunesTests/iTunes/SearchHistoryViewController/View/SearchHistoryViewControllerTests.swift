@@ -31,12 +31,12 @@ final class SearchHistoryViewControllerTests: XCTestCase {
     }
 
     func testViewWillAppearCallsPresenterViewDidLoad() {
-        viewController.viewWillAppear(true)
+        viewController.viewWillAppear(false)
 
         XCTAssertTrue(mockPresenter.viewDidLoadCalled)
     }
 
-    func testUpdateSearchHistoryUpdatesData() {
+    func testUpdateSearchHistoryReloadsTableView() {
         let searchHistory = ["Search1", "Search2"]
         viewController.updateSearchHistory(searchHistory)
 
