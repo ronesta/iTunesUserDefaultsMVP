@@ -49,7 +49,7 @@ final class AlbumPresenterTests: XCTestCase {
     }
 
     private func waitForAsyncTasksToComplete() {
-        let expectation = self.expectation(description: "Waiting for async tasks")
+        let expectation = expectation(description: "Waiting for async tasks")
         DispatchQueue.main.async {
             expectation.fulfill()
         }

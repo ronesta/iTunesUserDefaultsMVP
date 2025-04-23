@@ -5,7 +5,6 @@
 //  Created by Ибрагим Габибли on 13.04.2025.
 //
 
-
 import XCTest
 import ViewControllerPresentationSpy
 @testable import iTunesUserDefaultsMVP
@@ -48,7 +47,6 @@ final class SearchViewControllerTests: XCTestCase {
 
         XCTAssertEqual(mockPresenter.didTypeSearchQuery, term)
     }
-
 
     func testUpdateAlbumsReloadsData() {
         let albums = [
@@ -96,22 +94,5 @@ final class SearchViewControllerTests: XCTestCase {
 
         XCTAssertTrue(viewController.searchBar.isHidden)
         XCTAssertEqual(mockPresenter.searchFromHistoryTerm, term)
-    }
-
-    func testSearchBarSearchButtonClickedCallsPresenter() {
-        let term = "SomeTerm"
-
-        viewController.searchBar.text = term
-        viewController.searchBarSearchButtonClicked(viewController.searchBar)
-
-        XCTAssertEqual(mockPresenter.searchButtonClickedTerm, term)
-    }
-
-    func testSearchBarTextDidChangeCallsPresenterWithCorrectText() {
-        let term = "SomeTerm"
-
-        viewController.searchBar(viewController.searchBar, textDidChange: term)
-
-        XCTAssertEqual(mockPresenter.didTypeSearchQuery, term)
     }
 }
