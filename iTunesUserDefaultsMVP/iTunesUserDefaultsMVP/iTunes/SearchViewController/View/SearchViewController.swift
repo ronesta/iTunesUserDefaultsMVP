@@ -98,7 +98,7 @@ extension SearchViewController: UICollectionViewDelegate {
 }
 
 // MARK: - SearchViewInputProtocol
-extension SearchViewController: SearchViewInputProtocol {
+extension SearchViewController {
     func performSearch(with term: String) {
         searchBar.isHidden = true
         presenter.searchFromHistory(with: term)
