@@ -11,13 +11,13 @@ import XCTest
 final class SearchPresenterTests: XCTestCase {
     private var presenter: SearchPresenter!
     private var mockView: MockSearchView!
-    private var mockITunesService: MockITunesServiceForPresenter!
+    private var mockITunesService: MockITunesService!
     private var mockStorageManager: MockStorageManager!
 
     override func setUp() {
         super.setUp()
         mockView = MockSearchView()
-        mockITunesService = MockITunesServiceForPresenter()
+        mockITunesService = MockITunesService()
         mockStorageManager = MockStorageManager()
 
         presenter = SearchPresenter(iTunesService: mockITunesService,

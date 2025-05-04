@@ -1,6 +1,6 @@
 //
-//  MockITunesService.swift
-//  iTunesUserDefaultsMVP
+//  MockITunesServiceForPresenter.swift
+//  iTunesTests
 //
 //  Created by Ибрагим Габибли on 13.04.2025.
 //
@@ -9,24 +9,17 @@ import Foundation
 @testable import iTunesUserDefaultsMVP
 
 final class MockITunesService: ITunesServiceProtocol {
+    private(set) var shouldReturnError = false
     private(set) var albumName: String?
-    var result: Result<[Album], Error>?
-    
+    var albums = [Album]()
+
     func loadAlbums(albumName: String, completion: @escaping (Result<[Album], Error>) -> Void) {
-        self.albumName = albumName
-        if let result = result {
-            completion(result)
-        }
-    }
-
-    func loadAlbumsWithInvalidJSON(albumName: String, completion: @escaping (Result<[Album], Error>) -> Void) {
-        let invalidJSON = "".data(using: .utf8)!
-
-        do {
-            let _ = try JSONDecoder().decode(PostAlbums.self, from: invalidJSON)
-            completion(.success([]))
-        } catch {
+        if shouldReturnError {
+            let error = NSError(domain: "Test", code: 0, userInfo: nil)
             completion(.failure(error))
+        } else {
+            self.albumName = albumName
+            completion(.success(albums))
         }
     }
 }
