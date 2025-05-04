@@ -2,7 +2,7 @@
 //  MockImageLoader.swift
 //  iTunesUserDefaultsMVP
 //
-//  Created by Ибрагим Габибли on 14.04.2025.
+//  Created by Ибрагим Габибли on 04.05.2025.
 //
 
 import UIKit.UIImage
