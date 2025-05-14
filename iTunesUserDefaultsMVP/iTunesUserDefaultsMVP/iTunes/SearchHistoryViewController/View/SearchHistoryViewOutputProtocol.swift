@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SearchHistoryPresenterProtocol: AnyObject {
+protocol SearchHistoryViewOutputProtocol: AnyObject {
     func viewDidLoad()
 }

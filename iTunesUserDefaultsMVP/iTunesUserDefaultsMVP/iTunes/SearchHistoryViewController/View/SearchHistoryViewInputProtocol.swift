@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SearchHistoryViewProtocol: AnyObject {
+protocol SearchHistoryViewInputProtocol: AnyObject {
     func updateSearchHistory(_ history: [String])
 }

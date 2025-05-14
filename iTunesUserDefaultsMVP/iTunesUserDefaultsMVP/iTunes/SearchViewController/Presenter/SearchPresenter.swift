@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-final class SearchPresenter: SearchPresenterProtocol {
-    weak var view: SearchViewProtocol?
+final class SearchPresenter: SearchViewOutputProtocol {
+    weak var view: SearchViewInputProtocol?
 
     private let iTunesService: ITunesServiceProtocol
     private let storageManager: StorageManagerProtocol

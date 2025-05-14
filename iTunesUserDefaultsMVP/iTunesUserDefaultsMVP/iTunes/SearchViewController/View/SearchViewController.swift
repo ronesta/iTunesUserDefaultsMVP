@@ -36,12 +36,12 @@ final class SearchViewController: UIViewController {
         return collectionView
     }()
 
-    private let presenter: SearchPresenterProtocol
+    private let presenter: SearchViewOutputProtocol
     private let collectionViewDataSource: SearchDataSourceProtocol
 
     var onSelect: ((IndexPath) -> Void)?
 
-    init(presenter: SearchPresenterProtocol,
+    init(presenter: SearchViewOutputProtocol,
          collectionViewDataSource: SearchDataSourceProtocol
     ) {
         self.presenter = presenter
@@ -76,8 +76,8 @@ final class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - SearchViewProtocol
-extension SearchViewController: SearchViewProtocol {
+// MARK: - SearchViewInputProtocol
+extension SearchViewController: SearchViewInputProtocol {
     func updateAlbums(_ albums: [Album]) {
         collectionViewDataSource.albums = albums
         collectionView.reloadData()
@@ -88,20 +88,17 @@ extension SearchViewController: SearchViewProtocol {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+
+    func performSearch(with term: String) {
+        searchBar.isHidden = true
+        presenter.searchFromHistory(with: term)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         onSelect?(indexPath)
-    }
-}
-
-// MARK: - SearchViewInputProtocol
-extension SearchViewController {
-    func performSearch(with term: String) {
-        searchBar.isHidden = true
-        presenter.searchFromHistory(with: term)
     }
 }
 

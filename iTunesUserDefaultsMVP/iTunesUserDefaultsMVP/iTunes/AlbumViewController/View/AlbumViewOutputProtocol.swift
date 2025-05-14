@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol AlbumPresenterProtocol: AnyObject {
+protocol AlbumViewOutputProtocol: AnyObject {
     func viewDidLoad()
 }

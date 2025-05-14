@@ -8,7 +8,7 @@
 import Foundation
 @testable import iTunesUserDefaultsMVP
 
-final class MockSearchHistoryView: SearchHistoryViewProtocol {
+final class MockSearchHistoryView: SearchHistoryViewInputProtocol {
     private(set) var updatedSearchHistory: [String]?
 
     func updateSearchHistory(_ history: [String]) {

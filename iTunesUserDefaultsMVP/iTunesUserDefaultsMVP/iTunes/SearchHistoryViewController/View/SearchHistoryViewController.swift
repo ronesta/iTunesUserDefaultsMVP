@@ -15,12 +15,12 @@ final class SearchHistoryViewController: UIViewController {
         return tableView
     }()
 
-    private let presenter: SearchHistoryPresenterProtocol
+    private let presenter: SearchHistoryViewOutputProtocol
     private let tableViewDataSource: SearchHistoryDataSourceProtocol
 
     var onSelect: ((IndexPath) -> Void)?
 
-    init(presenter: SearchHistoryPresenterProtocol,
+    init(presenter: SearchHistoryViewOutputProtocol,
          tableViewDataSource: SearchHistoryDataSourceProtocol
     ) {
         self.presenter = presenter
@@ -62,7 +62,7 @@ final class SearchHistoryViewController: UIViewController {
 }
 
 // MARK: - SearchHistoryViewProtocol
-extension SearchHistoryViewController: SearchHistoryViewProtocol {
+extension SearchHistoryViewController: SearchHistoryViewInputProtocol {
     func updateSearchHistory(_ history: [String]) {
         tableViewDataSource.searchHistory = history
         self.tableView.reloadData()

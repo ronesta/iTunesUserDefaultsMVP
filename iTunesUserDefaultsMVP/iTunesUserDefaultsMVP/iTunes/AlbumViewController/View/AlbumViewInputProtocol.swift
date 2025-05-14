@@ -8,6 +8,6 @@
 import Foundation
 import UIKit.UIImage
 
-protocol AlbumViewProtocol: AnyObject {
+protocol AlbumViewInputProtocol: AnyObject {
     func displayAlbumDetails(album: Album, image: UIImage)
 }

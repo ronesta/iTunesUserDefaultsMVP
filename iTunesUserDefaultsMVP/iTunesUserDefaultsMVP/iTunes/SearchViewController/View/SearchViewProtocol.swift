@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SearchViewProtocol: AnyObject {
+protocol SearchViewInputProtocol: AnyObject {
     func updateAlbums(_ albums: [Album])
 
     func showError(_ message: String)

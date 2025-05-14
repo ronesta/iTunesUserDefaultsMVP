@@ -8,7 +8,7 @@
 import Foundation
 @testable import iTunesUserDefaultsMVP
 
-final class MockAlbumPresenter: AlbumPresenterProtocol {
+final class MockAlbumPresenter: AlbumViewOutputProtocol {
     private(set) var viewDidLoadCalled = false
 
     func viewDidLoad() {

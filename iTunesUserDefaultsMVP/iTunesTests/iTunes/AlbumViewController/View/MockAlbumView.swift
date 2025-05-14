@@ -8,7 +8,7 @@
 import UIKit.UIImage
 @testable import iTunesUserDefaultsMVP
 
-final class MockAlbumView: AlbumViewProtocol {
+final class MockAlbumView: AlbumViewInputProtocol {
     private(set) var displayedAlbum: Album?
     private(set) var displayedImage: UIImage?
 

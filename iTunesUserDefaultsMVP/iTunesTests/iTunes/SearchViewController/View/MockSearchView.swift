@@ -8,7 +8,7 @@
 import Foundation
 @testable import iTunesUserDefaultsMVP
 
-final class MockSearchView: SearchViewProtocol {
+final class MockSearchView: SearchViewInputProtocol {
     private(set) var albums: [Album]?
     private(set) var errorMessage: String?
 

@@ -8,7 +8,7 @@
 import Foundation
 @testable import iTunesUserDefaultsMVP
 
-final class MockSearchPresenter: SearchPresenterProtocol {
+final class MockSearchPresenter: SearchViewOutputProtocol {
     private(set) var didTypeSearchQuery: String?
     private(set) var searchButtonClickedTerm: String?
     private(set) var searchFromHistoryTerm: String?

@@ -8,7 +8,7 @@
 import Foundation
 @testable import iTunesUserDefaultsMVP
 
-final class MockSearchHistoryPresenter: SearchHistoryPresenterProtocol {
+final class MockSearchHistoryPresenter: SearchHistoryViewOutputProtocol {
     private(set) var viewDidLoadCalled = false
 
     func viewDidLoad() {

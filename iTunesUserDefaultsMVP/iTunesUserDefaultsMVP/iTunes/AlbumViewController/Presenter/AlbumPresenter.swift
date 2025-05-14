@@ -8,8 +8,8 @@
 import Foundation
 import UIKit.UIImage
 
-final class AlbumPresenter: AlbumPresenterProtocol {
-    weak var view: AlbumViewProtocol?
+final class AlbumPresenter: AlbumViewOutputProtocol {
+    weak var view: AlbumViewInputProtocol?
 
     private let imageLoader: ImageLoaderProtocol
     private let album: Album
