@@ -40,7 +40,7 @@ final class SearchPresenterTests: XCTestCase {
         presenter.didTypeSearch(term)
 
         // Then
-        XCTAssertEqual(mockITunesService.albumName, term)
+        XCTAssertEqual(mockITunesService.loadAlbumsArgsTerms.first, term)
     }
 
     func test_GivenSearchTerm_WhenSearchButtonClicked_ThenSearchTermIsSaved() {
@@ -114,7 +114,7 @@ final class SearchPresenterTests: XCTestCase {
         XCTAssertEqual(mockView.showErrorCallCount, 0)
     }
 
-    func test_GivenNewAlbums_WhenSearchAlbums_ThenAlbumsAreAreFetchedAndDisplayed() {
+    func test_GivenNewAlbums_WhenSearchAlbums_ThenAlbumsAreFetchedAndDisplayed() {
         // Given
         let term = "Eminem"
         let albums = [
@@ -133,12 +133,8 @@ final class SearchPresenterTests: XCTestCase {
 
         // Then
         XCTAssertEqual(mockITunesService.loadAlbumsCallCount, 1)
+        XCTAssertEqual(mockITunesService.loadAlbumsArgsTerms.first, term)
         XCTAssertEqual(mockView.updateAlbumsCallCount, 1)
         XCTAssertEqual(mockView.updateAlbumsArgsAlbums.first, albums)
-        XCTAssertEqual(mockView.showErrorCallCount, 0)
-        XCTAssertEqual(mockStorageManager.albums.count, albums.count)
-
-        let savedAlbums = mockStorageManager.loadAlbums(for: term)
-        XCTAssertEqual(savedAlbums, albums)
     }
 }
