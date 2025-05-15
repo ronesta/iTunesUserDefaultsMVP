@@ -9,14 +9,19 @@ import Foundation
 @testable import iTunesUserDefaultsMVP
 
 final class MockSearchView: SearchViewInputProtocol {
-    private(set) var albums: [Album]?
-    private(set) var errorMessage: String?
+    private(set) var updateAlbumsCallCount = 0
+    private(set) var updateAlbumsArgsAlbums = [[Album]]()
+
+    private(set) var showErrorCallCount = 0
+    private(set) var showErrorArgsMessages = String()
 
     func updateAlbums(_ albums: [Album]) {
-        self.albums = albums
+        updateAlbumsCallCount += 1
+        updateAlbumsArgsAlbums.append(albums)
     }
     
     func showError(_ message: String) {
-        errorMessage = message
+        showErrorCallCount += 1
+        showErrorArgsMessages.append(message)
     }
 }

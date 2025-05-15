@@ -19,10 +19,8 @@ final class SearchPresenterTests: XCTestCase {
         mockView = MockSearchView()
         mockITunesService = MockITunesService()
         mockStorageManager = MockStorageManager()
-
         presenter = SearchPresenter(iTunesService: mockITunesService,
-                                    storageManager: mockStorageManager
-        )
+                                    storageManager: mockStorageManager)
         presenter.view = mockView
     }
 
@@ -34,23 +32,31 @@ final class SearchPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testDidTypeSearchQueryCallsService() {
+    func test_GivenSearchTerm_WhenDidTypeSearch_ThenServiceReceivesTerm() {
+        // Given
         let term = "SomeAlbum"
+
+        // When
         presenter.didTypeSearch(term)
 
+        // Then
         XCTAssertEqual(mockITunesService.albumName, term)
     }
 
-    func testSearchButtonClickedSavesSearchTerm() {
+    func test_GivenSearchTerm_WhenSearchButtonClicked_ThenSearchTermIsSaved() {
+        // Given
         let term = "SomeAlbum"
+
+        // When
         presenter.searchButtonClicked(with: term)
 
+        // Then
         XCTAssertTrue(mockStorageManager.searchHistory.contains(term))
     }
 
-    func testSearchFromHistoryLoadsAlbums() {
+    func test_GivenSavedAlbums_WhenSearchFromHistory_ThenAlbumsAreDisplayedFromStorage() {
+        // Given
         let term = "SomeAlbum"
-
         let albums = [
             Album(artistId: 111051,
                   artistName: "Eminem",
@@ -67,15 +73,19 @@ final class SearchPresenterTests: XCTestCase {
         ]
 
         mockStorageManager.saveAlbums(albums, for: term)
+
+        // When
         presenter.searchFromHistory(with: term)
 
-        XCTAssertEqual(mockView.albums, albums)
-        XCTAssertNil(mockView.errorMessage)
+        // Then
+        XCTAssertEqual(mockView.updateAlbumsCallCount, 1)
+        XCTAssertEqual(mockView.updateAlbumsArgsAlbums.first, albums)
+        XCTAssertEqual(mockView.showErrorCallCount, 0)
     }
 
-    func testSearchAlbumsWithSavedAlbums() {
+    func test_GivenSavedAlbums_WhenSearchAlbums_ThenAlbumsAreDisplayedFromStorage() {
+        // Given
         let term = "SavedAlbums"
-
         let albums = [
             Album(artistId: 111051,
                   artistName: "Eminem",
@@ -92,18 +102,21 @@ final class SearchPresenterTests: XCTestCase {
         ]
 
         mockStorageManager.saveAlbums(albums, for: term)
+
+        // When
         presenter.searchAlbums(with: term)
 
+        // Then
         let savedAlbums = mockStorageManager.loadAlbums(for: term)
         XCTAssertEqual(savedAlbums, albums)
-
-        XCTAssertEqual(mockView.albums, albums)
-        XCTAssertNil(mockView.errorMessage)
+        XCTAssertEqual(mockView.updateAlbumsCallCount, 1)
+        XCTAssertEqual(mockView.updateAlbumsArgsAlbums.first, albums)
+        XCTAssertEqual(mockView.showErrorCallCount, 0)
     }
 
-    func testSearchAlbumsWithNewAlbums() {
+    func test_GivenNewAlbums_WhenSearchAlbums_ThenAlbumsAreAreFetchedAndDisplayed() {
+        // Given
         let term = "Eminem"
-
         let albums = [
             Album(artistId: 111051,
                   artistName: "Eminem",
@@ -113,12 +126,17 @@ final class SearchPresenterTests: XCTestCase {
                  )
         ]
 
-        mockITunesService.albums = albums
+        mockITunesService.stubbedAlbumsResult = .success(albums)
 
+        // When
         presenter.searchAlbums(with: term)
 
-        XCTAssertEqual(mockView.albums, albums)
-        XCTAssertNil(mockView.errorMessage)
+        // Then
+        XCTAssertEqual(mockITunesService.loadAlbumsCallCount, 1)
+        XCTAssertEqual(mockView.updateAlbumsCallCount, 1)
+        XCTAssertEqual(mockView.updateAlbumsArgsAlbums.first, albums)
+        XCTAssertEqual(mockView.showErrorCallCount, 0)
+        XCTAssertEqual(mockStorageManager.albums.count, albums.count)
 
         let savedAlbums = mockStorageManager.loadAlbums(for: term)
         XCTAssertEqual(savedAlbums, albums)

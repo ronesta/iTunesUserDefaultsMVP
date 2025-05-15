@@ -9,17 +9,19 @@ import Foundation
 @testable import iTunesUserDefaultsMVP
 
 final class MockITunesService: ITunesServiceProtocol {
-    private(set) var shouldReturnError = false
+    private(set) var loadAlbumsCallCount = 0
+    private(set) var loadLabumsCompletions = [(Result<[Album], Error>) -> Void]()
     private(set) var albumName: String?
-    var albums = [Album]()
+
+    var stubbedAlbumsResult: Result<[Album], Error>?
 
     func loadAlbums(albumName: String, completion: @escaping (Result<[Album], Error>) -> Void) {
-        if shouldReturnError {
-            let error = NSError(domain: "Test", code: 0, userInfo: nil)
-            completion(.failure(error))
-        } else {
-            self.albumName = albumName
-            completion(.success(albums))
+        loadAlbumsCallCount += 1
+        loadLabumsCompletions.append(completion)
+        self.albumName = albumName
+
+        if let result = stubbedAlbumsResult {
+            completion(result)
         }
     }
 }
