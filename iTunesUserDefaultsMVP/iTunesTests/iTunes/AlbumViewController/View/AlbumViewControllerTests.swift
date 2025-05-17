@@ -24,13 +24,18 @@ final class AlbumViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testViewDidLoadCallsPresenter() {
+    func test_GivenPresenter_WhenViewDidLoad_ThenPresenterViewDidLoadIsCalled() {
+        // Given presenter
+
+        // When
         viewController.viewDidLoad()
-        
+
+        // Then
         XCTAssertTrue(mockPresenter.viewDidLoadCalled)
     }
 
-    func testDisplayAlbumDetailsUpdatesUI() {
+    func test_GivenAlbumAndImage_WhenDisplayAlbumDetailsCalled_ThenViewIsUpdatedWithAlbumDetails() {
+        // Given
         let image = UIImage(systemName: "checkmark.diamond")
         let album = Album(artistId: 111051,
                           artistName: "Eminem",
@@ -39,8 +44,10 @@ final class AlbumViewControllerTests: XCTestCase {
                           collectionPrice: 10.99
                          )
 
+        // When
         viewController.displayAlbumDetails(album: album, image: image!)
 
+        // Then
         XCTAssertEqual(viewController.albumNameLabel.text, "The Eminem Show")
         XCTAssertEqual(viewController.artistNameLabel.text, "Eminem")
         XCTAssertEqual(viewController.collectionPriceLabel.text, "10.99 $")

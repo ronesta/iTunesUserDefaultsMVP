@@ -10,7 +10,8 @@ import SnapshotTesting
 @testable import iTunesUserDefaultsMVP
 
 final class AlbumViewControllerSnapshotTests: XCTestCase {
-    func testAppearanceWithData() {
+    func test_GivenAlbumAndImage_WhenDisplayAlbumDetailsCalled_ThenViewControllerAppearanceMatchesSnapshot() {
+        // Given
         let mockPresenter = MockAlbumPresenter()
         let viewController = AlbumViewController(presenter: mockPresenter)
 
@@ -22,8 +23,10 @@ final class AlbumViewControllerSnapshotTests: XCTestCase {
                           collectionPrice: 10.99
                          )
 
+        // When
         viewController.displayAlbumDetails(album: album, image: image!)
 
+        // Then
         assertSnapshot(of: viewController, as: .image)
     }
 }

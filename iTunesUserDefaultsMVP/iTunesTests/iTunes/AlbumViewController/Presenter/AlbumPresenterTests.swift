@@ -37,15 +37,19 @@ final class AlbumPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testViewDidLoadDisplaysAlbumDetails() {
+    func test_GivenAlbumAndImage_WhenViewDidLoad_ThenAlbumDetailsAreDisplayed() {
+        // Given
         let expectedImage = UIImage(systemName: "checkmark.diamond")
         mockImageLoader.mockImage = expectedImage
 
+        // When
         presenter.viewDidLoad()
         waitForAsyncTasksToComplete()
 
-        XCTAssertEqual(mockView.displayedAlbum, mockAlbum)
-        XCTAssertEqual(mockView.displayedImage, expectedImage)
+        // Then
+        XCTAssertEqual(mockView.displayAlbumDetailsCallCount, 1)
+        XCTAssertEqual(mockView.displayAlbumDetailsArgsHistory.first?.album, mockAlbum)
+        XCTAssertEqual(mockView.displayAlbumDetailsArgsHistory.first?.image, expectedImage)
     }
 
     private func waitForAsyncTasksToComplete() {
