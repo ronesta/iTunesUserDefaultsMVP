@@ -44,19 +44,10 @@ final class AlbumPresenterTests: XCTestCase {
 
         // When
         presenter.viewDidLoad()
-        waitForAsyncTasksToComplete()
 
         // Then
         XCTAssertEqual(mockView.displayAlbumDetailsCallCount, 1)
         XCTAssertEqual(mockView.displayAlbumDetailsArgsHistory.first?.album, mockAlbum)
         XCTAssertEqual(mockView.displayAlbumDetailsArgsHistory.first?.image, expectedImage)
-    }
-
-    private func waitForAsyncTasksToComplete() {
-        let expectation = expectation(description: "Waiting for async tasks")
-        DispatchQueue.main.async {
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 1.0, handler: nil)
     }
 }
