@@ -36,13 +36,13 @@ final class SearchViewControllerSnapshotTests: XCTestCase {
         let navigationController = UINavigationController(rootViewController: viewController)
 
         // When
-        // View loads
+        viewController.loadViewIfNeeded()
 
         // Then
         assertSnapshot(of: navigationController, as: .image)
     }
 
-    func testGivenAlbums_WhenUpdated_ThenViewControllerAppearanceMatchesSnapshot() {
+    func testGivenAlbums_WhenUpdateAlbumsCalled_ThenViewControllerAppearanceMatchesSnapshot() {
         // Given
         let albums = [
             Album(artistId: 111051,

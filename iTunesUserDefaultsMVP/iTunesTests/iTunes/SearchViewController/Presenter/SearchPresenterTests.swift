@@ -20,7 +20,8 @@ final class SearchPresenterTests: XCTestCase {
         mockITunesService = MockITunesService()
         mockStorageManager = MockStorageManager()
         presenter = SearchPresenter(iTunesService: mockITunesService,
-                                    storageManager: mockStorageManager)
+                                    storageManager: mockStorageManager
+        )
         presenter.view = mockView
     }
 

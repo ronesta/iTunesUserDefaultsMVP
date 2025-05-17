@@ -28,15 +28,19 @@ final class SearchHistoryPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    func testViewDidLoadUpdatesSearchHistory() {
+    func test_GivenSavedSearchTerms_WhenViewDidLoad_ThenSearchHistoryIsUpdated() {
+        // Given
         let searchHistory = ["Search1", "Search2"]
 
         searchHistory.forEach { term in
             mockStorageManager.saveSearchTerm(term)
         }
 
+        // When
         presenter.viewDidLoad()
 
-        XCTAssertEqual(mockView.updatedSearchHistory, searchHistory)
+        // Then
+        XCTAssertEqual(mockView.updateSearchHistoryCallCount, 1)
+        XCTAssertEqual(mockView.updateSearchHistoryArgsHistory.first, searchHistory)
     }
 }

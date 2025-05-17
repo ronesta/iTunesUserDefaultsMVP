@@ -9,9 +9,11 @@ import Foundation
 @testable import iTunesUserDefaultsMVP
 
 final class MockSearchHistoryView: SearchHistoryViewInputProtocol {
-    private(set) var updatedSearchHistory: [String]?
+    private(set) var updateSearchHistoryCallCount = 0
+    private(set) var updateSearchHistoryArgsHistory = [[String]]()
 
     func updateSearchHistory(_ history: [String]) {
-        updatedSearchHistory = history
+        updateSearchHistoryCallCount += 1
+        updateSearchHistoryArgsHistory.append(history)
     }
 }

@@ -30,16 +30,24 @@ final class SearchHistoryViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testViewWillAppearCallsPresenterViewDidLoad() {
+    func test_GivenViewController_WhenViewWillAppear_ThenPresenterViewDidLoadIsCalled() {
+        // Given: A view controller with a mock presenter
+
+        // When
         viewController.viewWillAppear(false)
 
+        // Then
         XCTAssertTrue(mockPresenter.viewDidLoadCalled)
     }
 
-    func testUpdateSearchHistoryReloadsTableView() {
+    func test_GivenSearchHistory_WhenUpdateSearchHistory_ThenTableViewDataSourceIsUpdated() {
+        // Given
         let searchHistory = ["Search1", "Search2"]
+
+        // When
         viewController.updateSearchHistory(searchHistory)
 
+        // Then
         XCTAssertEqual(mockDataSource.searchHistory, searchHistory)
     }
 }
