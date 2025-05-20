@@ -31,7 +31,7 @@ final class SearchViewControllerSnapshotTests: XCTestCase {
         super.tearDown()
     }
     
-    func testGivenNoAlbums_WhenViewLoaded_ThenViewControllerAppearanceMatchesSnapshot() {
+    func test_GivenNoAlbums_WhenViewLoaded_ThenViewControllerAppearanceMatchesSnapshot() {
         // Given
         let navigationController = UINavigationController(rootViewController: viewController)
 
@@ -42,7 +42,7 @@ final class SearchViewControllerSnapshotTests: XCTestCase {
         assertSnapshot(of: navigationController, as: .image)
     }
 
-    func testGivenAlbums_WhenUpdateAlbumsCalled_ThenViewControllerAppearanceMatchesSnapshot() {
+    func test_GivenAlbums_WhenUpdateAlbumsCalled_ThenViewControllerAppearanceMatchesSnapshot() {
         // Given
         let albums = [
             Album(artistId: 111051,

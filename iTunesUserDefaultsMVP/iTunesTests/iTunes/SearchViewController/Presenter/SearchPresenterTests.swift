@@ -52,7 +52,7 @@ final class SearchPresenterTests: XCTestCase {
         presenter.searchButtonClicked(with: term)
 
         // Then
-        XCTAssertTrue(mockStorageManager.searchHistory.contains(term))
+        XCTAssertEqual(mockStorageManager.searchHistory.first, term)
     }
 
     func test_GivenSavedAlbums_WhenSearchFromHistory_ThenAlbumsAreDisplayedFromStorage() {

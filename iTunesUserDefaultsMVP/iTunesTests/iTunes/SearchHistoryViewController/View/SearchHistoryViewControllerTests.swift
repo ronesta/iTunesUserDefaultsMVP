@@ -31,7 +31,7 @@ final class SearchHistoryViewControllerTests: XCTestCase {
     }
 
     func test_GivenViewController_WhenViewWillAppear_ThenPresenterViewDidLoadIsCalled() {
-        // Given: A view controller with a mock presenter
+        // Given viewController with a mockPresenter
 
         // When
         viewController.viewWillAppear(false)

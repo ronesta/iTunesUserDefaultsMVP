@@ -101,7 +101,7 @@ final class SearchViewControllerTests: XCTestCase {
         )
     }
 
-    func test_GivenVisibleSearchBar_WhenPerformSearchCalled_ThenSearchBarIsHiddenAndPresenterIsCalled() {
+    func test_GivenSearchQueryInHistory_WhenPerformSearchCalled_ThenSearchBarIsHiddenAndPresenterIsCalled() {
         // Given
         let term = "SomeTerm"
         viewController.searchBar.isHidden = false

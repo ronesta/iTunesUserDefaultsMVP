@@ -13,7 +13,7 @@ final class MockSearchView: SearchViewInputProtocol {
     private(set) var updateAlbumsArgsAlbums = [[Album]]()
 
     private(set) var showErrorCallCount = 0
-    private(set) var showErrorArgsMessages = String()
+    private(set) var showErrorArgsMessages = [String]()
 
     func updateAlbums(_ albums: [Album]) {
         updateAlbumsCallCount += 1
