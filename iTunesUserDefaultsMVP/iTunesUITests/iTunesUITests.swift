@@ -50,7 +50,7 @@ final class iTunesUITests: XCTestCase {
     }
 
     func testCollectionViewCellExists() {
-        performSearch(with: "Sample Album")
+        performSearch(with: "Album")
 
         let firstCell = app.collectionViews.cells.element(boundBy: 0)
 
@@ -67,7 +67,7 @@ final class iTunesUITests: XCTestCase {
 
     // MARK: - AlbumViewController
     func testAlbumDetailsAreDisplayedCorrectly() throws {
-        performSearch(with: "Sample Album")
+        performSearch(with: "Album")
 
         let firstCell = app.collectionViews.cells.element(boundBy: 0)
         firstCell.tap()
