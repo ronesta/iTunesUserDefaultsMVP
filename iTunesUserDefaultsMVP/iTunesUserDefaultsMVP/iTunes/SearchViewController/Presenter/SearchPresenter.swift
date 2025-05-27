@@ -32,7 +32,7 @@ final class SearchPresenter: SearchViewOutputProtocol {
             return
         }
 
-        searchAlbums(with: searchQuery)
+        searchAlbums(with: searchQuery, showErrorOnFailure: false)
     }
 
     func searchButtonClicked(with term: String?) {
@@ -48,7 +48,7 @@ final class SearchPresenter: SearchViewOutputProtocol {
         searchAlbums(with: term)
     }
 
-    func searchAlbums(with term: String) {
+    func searchAlbums(with term: String, showErrorOnFailure: Bool = true) {
         if let savedAlbums = storageManager.loadAlbums(for: term) {
             albums = savedAlbums
             view?.updateAlbums(albums)
@@ -67,7 +67,9 @@ final class SearchPresenter: SearchViewOutputProtocol {
                 self.storageManager.saveAlbums(albums, for: term)
                 print("Successfully loaded \(albums.count) albums.")
             case .failure(let error):
-                self.view?.showError(error.localizedDescription)
+                if showErrorOnFailure {
+                    self.view?.showError(error.localizedDescription)
+                }
             }
         }
     }
